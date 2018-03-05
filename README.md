@@ -1,10 +1,10 @@
 #UWAGA do zespołu#
  
- po lewej znajduje się kilka linków, najbardziej interesuje nas *boards* tam znajduje się tabela do której wpisujemy i przenosimy zadania, poza tym kazdy powinien ogarniać jak działa git, było o tym już na slack
+ po lewej znajduje się kilka linków, najbardziej interesuje nas **boards** tam znajduje się tabela do której wpisujemy i przenosimy zadania, poza tym kazdy powinien ogarniać jak działa git, było o tym już na slack
  
  Ten plik powinien zostać adekwatnie zmodyfikowany, przez odpowiednie do tego osoby odpowiedzialne za projekt
  
- Każdy kto wprowadza jakąkolwiek treść do repozytorium *MUSI* sprawdzić, czy plik '.gitignore' zawiera regexpy na wszystkie pliki które nie wnoszą nic merytorycznego do projektu. --- W repozytorium może znajdować się jedynie kod źrudłowy i dokumentacja, wszelkie pliki konfiguracyjne, binarne itp są zabronione!
+ Każdy kto wprowadza jakąkolwiek treść do repozytorium **MUSI** sprawdzić, czy plik `.gitignore` zawiera regexpy na wszystkie pliki które nie wnoszą nic merytorycznego do projektu. --- W repozytorium może znajdować się jedynie kod źródłowy i dokumentacja, wszelkie pliki konfiguracyjne, binarne itp są zabronione!
 
 # README #
 
