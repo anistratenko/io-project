@@ -2,3 +2,8 @@
 
 # binary files
 *.class
+
+# IntelliJ files
+target/
+.idea/
+*.iml
