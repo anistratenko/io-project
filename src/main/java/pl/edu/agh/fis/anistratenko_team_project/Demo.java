@@ -13,6 +13,10 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.shape.StrokeLineJoin;
 
 class Point{
     Point(double x, double y)
@@ -59,7 +63,7 @@ public class Demo extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     @Override
     public void start(Stage primaryStage) {
 
@@ -68,8 +72,7 @@ public class Demo extends Application {
         Circle circ1 = new Circle(300.f, 270.f, 10.f);
         Circle circ2 = new Circle(400.f, 270.f, 5.f);
 
-        PendulumConfig config = new PendulumConfig(circ1, circ2,new Point(255,255));
-
+        PendulumConfig config = new PendulumConfig(circ1, circ2,new Point(250,250));
 
 		//mass dependend from radius, l1, l2 will be overwritten in setXY
         Pendulum P1 = new Pendulum(0.25, circ1.getRadius()/10., 0.25, circ2.getRadius()/10);
@@ -86,7 +89,21 @@ public class Demo extends Application {
 
     private void setWindow(Stage primaryStage, Circle circ1, Circle circ2, Line l1, Line l2) {
         primaryStage.setTitle("Double");
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(new Double[]{
+        250., 250.,
+        265., 265.,
+        235., 265. });
+
+        polygon.setFill(Color.TRANSPARENT);
+        polygon.setStroke(Color.BLUE);
+        polygon.setStrokeType(StrokeType.OUTSIDE);
+        polygon.setStrokeWidth(4.);
+        polygon.setStrokeLineJoin(StrokeLineJoin.ROUND);
+
+        
         StackPane root = new StackPane();
+        root.getChildren().add(new Pane(polygon));
         root.getChildren().add(new Pane(circ1));
         root.getChildren().add(new Pane(circ2));
         root.getChildren().add(new Pane(l1));
