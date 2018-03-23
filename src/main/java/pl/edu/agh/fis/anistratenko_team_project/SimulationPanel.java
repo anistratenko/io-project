@@ -65,7 +65,8 @@ public class SimulationPanel extends Pane{
      */
     public boolean applySimulation(Simulation simulation)
     {
-
+        //TODO: just mock
+        return true;
     }
 
     /**
