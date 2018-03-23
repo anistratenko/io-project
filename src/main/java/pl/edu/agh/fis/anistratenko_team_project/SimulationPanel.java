@@ -1,26 +1,32 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class SimulationPanel {
 
-    private Scene sceneToDraw;
+    private Pane sceneToDraw;
 
 
-    private void firstInit(StackPane parentPanel, int sizeX, int sizeY){
-        sceneToDraw = new Scene(parentPanel, sizeX,sizeY);
+    private void firstInit(int sizeX, int sizeY){
+        sceneToDraw = new Scene(sizeX,sizeY);
     }
 
-    public SimulationPanel(StackPane parentPanel){
-        firstInit(parentPanel,500,500);
+    public SimulationPanel(){
+        firstInit(500,500);
     }
 
-    public SimulationPanel(StackPane parentPanel, int sizeX, int sizeY){
-        firstInit(parentPanel,sizeX,sizeY);
+    public SimulationPanel(int sizeX, int sizeY){
+        firstInit(sizeX, sizeY);
+    }
+
+    public addToPane(Node elementInScene){
+        sceneToDraw.getChildren().add(elementInScene);
     }
     
-    public Scene GetScene(){
+    public Pane GetPane(){
         return sceneToDraw;
     }
 
