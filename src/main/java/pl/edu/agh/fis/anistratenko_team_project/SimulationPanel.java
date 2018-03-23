@@ -15,8 +15,8 @@ public class SimulationPanel extends Pane{
 
     /**
      * @brief Initialize empty panel
-     * @param sizeX width of panel
-     * @param sizeY height of panel
+     * @param sizeX - width of panel
+     * @param sizeY - height of panel
      */
     private void firstInit(int sizeX, int sizeY){
         sceneToDraw = new Pane();
@@ -33,8 +33,8 @@ public class SimulationPanel extends Pane{
 
     /**
      * @brief constructor where you can set size
-     * @param sizeX width of panel
-     * @param sizeY height of panel
+     * @param sizeX - width of panel
+     * @param sizeY - height of panel
      */
     public SimulationPanel(int sizeX, int sizeY){
         firstInit(sizeX, sizeY);
@@ -60,13 +60,19 @@ public class SimulationPanel extends Pane{
 
     /**
      * @brief apply all necessary Nodes to this Pane
-     * @param simulation Simulation to be drawn
+     * @param simulation - Simulation to be drawn
      * @return was all elements of simulation successfully added?
      */
     public boolean applySimulation(Simulation simulation)
     {
-        //TODO: just mock
-        return true;
+        boolean retVal = true;
+
+        for(Node i : simulation.getNodes())
+            retVal &= addToPane(i);
+
+        this.simulationName = simulation.toString();
+
+        return retVal;
     }
 
     /**

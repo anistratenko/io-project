@@ -1,5 +1,6 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,6 +42,11 @@ public class Main extends Application {
         primaryStage.setTitle(simulationWindow.toString());
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        AnimationTimer animation = new AnimationTimer(){
+            public void handle(long now){}
+        };
+        animation.start();
     }
     public static void main(String[] args) {
         launch(args);
