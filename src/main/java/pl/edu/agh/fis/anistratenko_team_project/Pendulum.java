@@ -4,7 +4,11 @@ public class Pendulum implements Simulation{
 
     public Pendulum()
     {
+        runPendulum();
+    }
 
+    private void runPendulum()
+    {
     }
 
 }
