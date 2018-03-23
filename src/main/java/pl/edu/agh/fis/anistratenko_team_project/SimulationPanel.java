@@ -5,13 +5,22 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public class SimulationPanel {
+/**
+ * @brief reserve space for simulation, holds all object to draw
+ */
+public class SimulationPanel extends Pane{
 
     private Pane sceneToDraw;
+    private String simulationName;
 
-
+    /**
+     * @brief Initialize empty panel
+     * @param sizeX
+     * @param sizeY
+     */
     private void firstInit(int sizeX, int sizeY){
-        sceneToDraw = new Scene(sizeX,sizeY);
+        sceneToDraw = new Pane();
+        sceneToDraw.setPrefSize(sizeX,sizeY);
     }
 
     public SimulationPanel(){
@@ -22,13 +31,21 @@ public class SimulationPanel {
         firstInit(sizeX, sizeY);
     }
 
-    public addToPane(Node elementInScene){
-        sceneToDraw.getChildren().add(elementInScene);
+    public boolean addToPane(Node elementInScene){
+       return sceneToDraw.getChildren().add(elementInScene);
     }
-    
+
     public Pane GetPane(){
         return sceneToDraw;
     }
 
+    public boolean applySimulation(Simulation simulation)
+    {
+
+    }
+    public String ToString(){
+        return simulationName;
+    }
 
 }
+

@@ -13,6 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
+        /*
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -27,6 +28,17 @@ public class Main extends Application {
         Scene scene = new Scene(root, 300, 250);
 
         primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        */
+        SimulationPanel simulationWindow = new SimulationPanel();
+
+        StackPane mainWindow = new StackPane();
+
+        mainWindow.getChildren().add(simulationWindow);
+
+        Scene scene = new Scene(mainWindow);
+
+        primaryStage.setTitle(simulationWindow.toString());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
