@@ -67,7 +67,7 @@ public class PendulumView implements SimulationView {
     /**
      * Run simulation and move positions of pendulums
      */
-   {
+    public void calculateDataToDraw() {
 
         pendulum.simulate(1.f / 60.f);
         c1.setCenterX(hook[0] + pendulum.x1 * hook[1]);
@@ -91,7 +91,9 @@ public class PendulumView implements SimulationView {
     }
 
     @Override
-    public String toString(){return "Pendulum";}
+    public String toString() {
+        return "Pendulum";
+    }
 
     @Override
     public ArrayList<Object> simulationSettings() {

@@ -17,6 +17,6 @@ public interface SimulationView {
 
     void calculateDataToDraw();
 
-    ArrayList<Object>  simulationSettings();
+    ArrayList<Object> simulationSettings();
 }
 
