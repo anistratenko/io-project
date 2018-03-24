@@ -2,21 +2,22 @@ package pl.edu.agh.fis.anistratenko_team_project;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private StackPane stackPane;
-    private SimulationPane simulationPane;
+    private SimulationController simulationController;
 
-    public void startSimulationThread(){
+    public void startSimulationThread() {
         new AnimationTimer() {
             long lastUpdate = 0;
 
             public void handle(long now) {
                 if (now - lastUpdate >= 17_000_000) {
-                    simulationPane.performSimulationStep();
+                    simulationController.performSimulationStep();
                     lastUpdate = now;
                 }
             }
@@ -24,15 +25,14 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        simulationPane = new SimulationPane();
-        stackPane = new StackPane();
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui.fxml"));
+        Parent root = fxmlLoader.load();
+        simulationController = new SimulationController((Pane)fxmlLoader.getNamespace().get("simulationPane"));
+        simulationController.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
 
-        simulationPane.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
-        stackPane.getChildren().add(simulationPane);
-
-        primaryStage.setTitle(simulationPane.toString());
-        primaryStage.setScene(new Scene(stackPane));
+        primaryStage.setTitle(simulationController.toString());
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
         startSimulationThread();
