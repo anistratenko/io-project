@@ -7,37 +7,35 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    private StackPane stackPane;
+    private SimulationPane simulationPane;
 
-    @Override
-    public void start(Stage primaryStage) {
-        //prepare simulation
-        SimulationPane simulationPane = new SimulationPane();
-        PendulumView pendulumView = new PendulumView(0.25, 1, 1.f, 0.5);
-        simulationPane.applySimulation(pendulumView);
-
-        //prepare window
-        StackPane mainWindow = new StackPane();
-
-        //add element of simulation to window
-        mainWindow.getChildren().add(simulationPane);
-
-        Scene scene = new Scene(mainWindow);
-
-        primaryStage.setTitle(simulationPane.toString());
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        AnimationTimer animation = new AnimationTimer() {
+    public void startSimulationThread(){
+        new AnimationTimer() {
             long lastUpdate = 0;
 
             public void handle(long now) {
                 if (now - lastUpdate >= 17_000_000) {
-                    simulationPane.simulationStep();
+                    simulationPane.performSimulationStep();
                     lastUpdate = now;
                 }
             }
-        };
-        animation.start();
+        }.start();
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        simulationPane = new SimulationPane();
+        stackPane = new StackPane();
+
+        simulationPane.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
+        stackPane.getChildren().add(simulationPane);
+
+        primaryStage.setTitle(simulationPane.toString());
+        primaryStage.setScene(new Scene(stackPane));
+        primaryStage.show();
+
+        startSimulationThread();
     }
 
     public static void main(String[] args) {

@@ -61,8 +61,8 @@ public class SimulationPane extends Pane {
         this.simulationName = simulation.toString();
     }
 
-    public void simulationStep() {
-        simulationView.calculateDataToDraw();
+    public void performSimulationStep() {
+        simulationView.performSimulationStep();
     }
 
     /**
