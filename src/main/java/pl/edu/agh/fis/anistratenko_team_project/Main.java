@@ -1,10 +1,8 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -12,24 +10,36 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("World!");
-            }
-        });
+        //prepare simulation
+        SimulationPane simulationPane = new SimulationPane();
+        PendulumView pendulumView = new PendulumView(0.25, 1, 1.f, 0.5);
+        simulationPane.applySimulation(pendulumView);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        //prepare window
+        StackPane mainWindow = new StackPane();
 
+        //add element of simulation to window
+        mainWindow.getChildren().add(simulationPane);
 
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(mainWindow);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle(simulationPane.toString());
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        AnimationTimer animation = new AnimationTimer() {
+            long lastUpdate = 0;
+
+            public void handle(long now) {
+                if (now - lastUpdate >= 17_000_000) {
+                    simulationPane.simulationStep();
+                    lastUpdate = now;
+                }
+            }
+        };
+        animation.start();
     }
+
     public static void main(String[] args) {
         launch(args);
     }
