@@ -89,4 +89,6 @@ public class PendulumView implements SimulationView {
         return elements;
     }
 
+    public String toString(){return "Pendulum";}
+
 }
