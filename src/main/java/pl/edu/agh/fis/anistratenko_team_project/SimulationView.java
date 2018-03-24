@@ -16,5 +16,7 @@ public interface SimulationView {
     String toString();
 
     void calculateDataToDraw();
+
+    ArrayList<Object>  simulationSettings();
 }
 

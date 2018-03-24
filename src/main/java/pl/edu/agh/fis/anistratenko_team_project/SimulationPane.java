@@ -55,7 +55,6 @@ public class SimulationPane extends Pane {
      */
     public void applySimulation(SimulationView simulation) {
         simulationView = simulation;
-        simulationName = simulation.toString();
         for (Node i : simulation.getNodes())
             addToPane(i);
 
