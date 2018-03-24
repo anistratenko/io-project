@@ -31,7 +31,7 @@ public class SimulationPanel extends Pane{
         firstInit(500,500);
     }
 
-    /**
+    /**Pendulum
      * @brief constructor where you can set size
      * @param sizeX - width of panel
      * @param sizeY - height of panel
@@ -63,7 +63,7 @@ public class SimulationPanel extends Pane{
      * @param simulation - Simulation to be drawn
      * @return was all elements of simulation successfully added?
      */
-    public boolean applySimulation(Simulation simulation)
+    public boolean applySimulation(SimulationView simulation)
     {
         boolean retVal = true;
 
@@ -73,6 +73,10 @@ public class SimulationPanel extends Pane{
         this.simulationName = simulation.toString();
 
         return retVal;
+    }
+    public void simulationStep(SimulationView simulation)
+    {
+        simulation.calculateDataToDraw();
     }
 
     /**

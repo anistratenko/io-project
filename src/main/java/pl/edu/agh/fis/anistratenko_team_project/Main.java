@@ -13,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
+        //Button btn = new Button();
         /*
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -31,10 +31,15 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         */
+        //prepare simulation
         SimulationPanel simulationWindow = new SimulationPanel();
+        PendulumView pendulum = new PendulumView(0.25,1,1.f,0.5);
+        simulationWindow.applySimulation(pendulum);
 
+        //prepare window
         StackPane mainWindow = new StackPane();
 
+        //add element of simulation to window
         mainWindow.getChildren().add(simulationWindow);
 
         Scene scene = new Scene(mainWindow);
@@ -44,7 +49,13 @@ public class Main extends Application {
         primaryStage.show();
 
         AnimationTimer animation = new AnimationTimer(){
-            public void handle(long now){}
+            long lastUpdate = 0;
+            public void handle(long now){
+                if (now - lastUpdate >= 17_000_000)
+                pendulum.calculateDataToDraw();
+                lastUpdate=now;
+
+            }
         };
         animation.start();
     }
