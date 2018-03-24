@@ -13,24 +13,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        //Button btn = new Button();
-        /*
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("World!");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        */
         //prepare simulation
         SimulationPanel simulationWindow = new SimulationPanel();
         PendulumView pendulum = new PendulumView(0.25,1,1.f,0.5);
@@ -52,7 +34,7 @@ public class Main extends Application {
             long lastUpdate = 0;
             public void handle(long now){
                 if (now - lastUpdate >= 17_000_000)
-                pendulum.calculateDataToDraw();
+                simulationWindow.simulationStep();
                 lastUpdate=now;
 
             }

@@ -1,8 +1,4 @@
 package pl.edu.agh.fis.anistratenko_team_project;
-
-
-import java.io.IOException;
-
 public class Pendulum
 {
     private final double PI = 3.14159265359;
@@ -18,6 +14,8 @@ public class Pendulum
     private double m1 = 0.;
     private double m2 = 0.;
     private double g = 9.81;
+    private double real_t = 0.;
+    private double t = 0.;
 
     //flag for double/single pendulum distinction
     private boolean DP;
@@ -49,6 +47,8 @@ public class Pendulum
 
         d_phi = 0;
         d2_phi = 0;
+        real_t = 0.;
+        t = 0.;
     }
 
     public void setG(double G)
@@ -83,17 +83,17 @@ public class Pendulum
     public void simulate(double time, double F)
     {
         //internal time-step for computations
-        double dt = 1./60. * 1e-4;
+        double dt = 5e-4;
         //time measuring
-        double t = 0.;
+        real_t += time;
         if (DP)
         {
-            while (t < time)
+            while (t < real_t)
             {
                 d2_phi = 	(
                         - m2*l1*d_theta*d_theta*Math.sin(phi-theta)*Math.cos(phi-theta)
                                 + g*m2*Math.sin(theta)*Math.cos(phi-theta)
-              - m2*l2*d_theta*d_theta*Math.sin(phi-theta)
+                                - m2*l2*d_theta*d_theta*Math.sin(phi-theta)
                                 - (m1+m2)*g*Math.sin(phi)
                 )
                         /
@@ -149,30 +149,13 @@ public class Pendulum
         }
     }
 
- /*   public static void main(String[] args) {
-        Pendulum p = new Pendulum(0.25, 1);
+    public static void main(String[] args) {
+        Pendulum p = new Pendulum(0.25, 1, 0.3,2);
 
-        //try
-       // {
-        //    PrintWriter out = new PrintWriter(new FileWriter("pendulum.dat"));
-            double t = 0.;
-            double dt = 1./60.;
-            double F = 2;
-            double in = 2;
-            while (t < 30)
-            {
-                t+=dt;
-                p.simulate(dt, F);
-                if (t > in)
-                {F = -F; in *=3;}
-               // out.println(pendulum.x1+" "+pendulum.y1 + " " + Math.sqrt(pendulum.x1*pendulum.x1 + pendulum.y1*pendulum.y1));
-            //    out.println(pendulum.x2+" "+pendulum.y2 + " " + Math.sqrt((pendulum.x2 - pendulum.x1)*(pendulum.x2 - pendulum.x1) + (pendulum.y2 - pendulum.y1)*(pendulum.y2 - pendulum.y1)));
-            }
-        //    out.close();
-        }
-        catch (IOException e)
-        {
+        Long start = System.nanoTime();
+        for (int i = 0; i < 600; i++) p.simulate(1./60.);
 
-        }
-    }*/
+        System.out.println( "Computation time per 1 second simulated: " + ((System.nanoTime() - start)*1e-9/10) );
+        System.out.println( "Computation time of 1/60 sec: 			  " + ((System.nanoTime() - start)*1e-9/600));
+    }
 }

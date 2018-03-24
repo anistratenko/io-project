@@ -9,8 +9,7 @@ import javafx.scene.layout.StackPane;
  * @brief reserve space for simulation, holds all object to draw
  */
 public class SimulationPanel extends Pane{
-
-    private Pane sceneToDraw;
+    private SimulationView simulationView;
     private String simulationName;
 
     /**
@@ -19,8 +18,7 @@ public class SimulationPanel extends Pane{
      * @param sizeY - height of panel
      */
     private void firstInit(int sizeX, int sizeY){
-        sceneToDraw = new Pane();
-        sceneToDraw.setPrefSize(sizeX,sizeY);
+        setPrefSize(sizeX,sizeY);
     }
 
     /**
@@ -46,16 +44,8 @@ public class SimulationPanel extends Pane{
      * @param elementInScene element to be drawn
      * @return true if Element was added successfully
      */
-    public boolean addToPane(Node elementInScene){
-       return sceneToDraw.getChildren().add(elementInScene);
-    }
-
-    /**
-     * @brief get hole pane to draw it
-     * @return scene to be drawn
-     */
-    public Pane GetPane(){
-        return sceneToDraw;
+    public void addToPane(Node elementInScene){
+       getChildren().add(elementInScene);
     }
 
     /**
@@ -63,26 +53,24 @@ public class SimulationPanel extends Pane{
      * @param simulation - Simulation to be drawn
      * @return was all elements of simulation successfully added?
      */
-    public boolean applySimulation(SimulationView simulation)
+    public void applySimulation(SimulationView simulation)
     {
-        boolean retVal = true;
-
+        simulationView = simulation;
         for(Node i : simulation.getNodes())
-            retVal &= addToPane(i);
+            addToPane(i);
 
         this.simulationName = simulation.toString();
-
-        return retVal;
     }
-    public void simulationStep(SimulationView simulation)
+    public void simulationStep()
     {
-        simulation.calculateDataToDraw();
+        simulationView.calculateDataToDraw();
     }
 
     /**
      * @return Name of the simulation
      */
-    public String ToString(){
+    @Override
+    public String toString(){
         return simulationName;
     }
 

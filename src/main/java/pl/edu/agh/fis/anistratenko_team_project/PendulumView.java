@@ -47,7 +47,7 @@ public class PendulumView implements SimulationView{
         c2 = new Circle(400.f, 270.f, 5.f);
         elements.add(c1);
         elements.add(c2);
-
+        pendulum.setXY((c1.getCenterX() - 250.) / 250., (c1.getCenterY() - 250.) / 250., (c2.getCenterX() - 250.) / 250., (c2.getCenterY() - 250.) / 250.);
         l1 =  new Line(hook[0],hook[1],c1.getCenterX(),c1.getCenterY());
         l2 = new Line(c1.getCenterX(),c1.getCenterY(),c2.getCenterX(),c2.getCenterY());
         elements.add(l1);
