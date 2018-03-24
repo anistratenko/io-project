@@ -1,68 +1,67 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 /**
  * @brief reserve space for simulation, holds all object to draw
  */
-public class SimulationPane extends Pane{
+public class SimulationPane extends Pane {
     private SimulationView simulationView;
     private String simulationName;
 
     /**
-     * @brief Initialize empty panel
      * @param sizeX - width of panel
      * @param sizeY - height of panel
+     * @brief Initialize empty panel
      */
-    private void firstInit(int sizeX, int sizeY){
-        setPrefSize(sizeX,sizeY);
+    private void firstInit(int sizeX, int sizeY) {
+        setPrefSize(sizeX, sizeY);
     }
 
     /**
      * @brief default constructor, sets width and height to 500
      */
 
-    public SimulationPane(){
-        firstInit(500,500);
+    public SimulationPane() {
+        firstInit(500, 500);
     }
 
-    /**Pendulum
-     * @brief constructor where you can set size
+    /**
+     * Pendulum
+     *
      * @param sizeX - width of panel
      * @param sizeY - height of panel
+     * @brief constructor where you can set size
      */
-    public SimulationPane(int sizeX, int sizeY){
+    public SimulationPane(int sizeX, int sizeY) {
         firstInit(sizeX, sizeY);
     }
 
 
     /**
-     * @brief add element to be drawn in panel
      * @param elementInScene element to be drawn
      * @return true if Element was added successfully
+     * @brief add element to be drawn in panel
      */
-    public void addToPane(Node elementInScene){
-       getChildren().add(elementInScene);
+    public void addToPane(Node elementInScene) {
+        getChildren().add(elementInScene);
     }
 
     /**
-     * @brief apply all necessary Nodes to this Pane
      * @param simulation - Simulation to be drawn
      * @return was all elements of simulation successfully added?
+     * @brief apply all necessary Nodes to this Pane
      */
-    public void applySimulation(SimulationView simulation)
-    {
+    public void applySimulation(SimulationView simulation) {
         simulationView = simulation;
-        for(Node i : simulation.getNodes())
+        for (Node i : simulation.getNodes())
             addToPane(i);
 
         this.simulationName = simulation.toString();
     }
-    public void simulationStep()
-    {
+
+    public void simulationStep() {
         simulationView.calculateDataToDraw();
     }
 
@@ -70,7 +69,7 @@ public class SimulationPane extends Pane{
      * @return Name of the simulation
      */
     @Override
-    public String toString(){
+    public String toString() {
         return simulationName;
     }
 

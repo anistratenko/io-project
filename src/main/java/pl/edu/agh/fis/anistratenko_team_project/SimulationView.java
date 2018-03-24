@@ -1,8 +1,7 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
-import javafx.collections.ObservableList;
-
 import javafx.scene.Node;
+
 import java.util.ArrayList;
 
 public interface SimulationView {
