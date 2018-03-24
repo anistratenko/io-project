@@ -70,16 +70,18 @@ public class PendulumView implements SimulationView {
     public void calculateDataToDraw() {
 
         pendulum.simulate(1.f / 60.f);
-        c1.setCenterX(hook[0] + pendulum.x1 * hook[1]);
-        c1.setCenterY(hook[0] - pendulum.y1 * hook[1]);
-        c2.setCenterX(hook[0] + pendulum.x2 * hook[1]);
-        c2.setCenterY(hook[0] - pendulum.y2 * hook[1]);
-        l1.setEndX(hook[0] + pendulum.x1 * hook[1]);
-        l1.setEndY(hook[0] - pendulum.y1 * hook[1]);
-        l2.setStartX(hook[0] + pendulum.x1 * hook[1]);
-        l2.setStartY(hook[0] - pendulum.y1 * hook[1]);
-        l2.setEndX(hook[0] + pendulum.x2 * hook[1]);
-        l2.setEndY(hook[0] - pendulum.y2 * hook[1]);
+        c1.setCenterX(hook[0] + pendulum.x1 * 250);
+        c1.setCenterY(hook[1] - pendulum.y1 * 250);
+        c2.setCenterX(hook[0] + pendulum.x2 * 250);
+        c2.setCenterY(hook[1] - pendulum.y2 * 250);
+        l1.setStartX(hook[0]);
+        l1.setStartY(hook[1]);
+        l1.setEndX(hook[0] + pendulum.x1 * 250);
+        l1.setEndY(hook[1] - pendulum.y1 * 250);
+        l2.setStartX(hook[0] + pendulum.x1 * 250);
+        l2.setStartY(hook[1] - pendulum.y1 * 250);
+        l2.setEndX(hook[0] + pendulum.x2 * 250);
+        l2.setEndY(hook[1] - pendulum.y2 * 250);
     }
 
     /**

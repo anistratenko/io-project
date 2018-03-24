@@ -13,6 +13,7 @@ public class Main extends Application {
         //prepare simulation
         SimulationPane simulationPane = new SimulationPane();
         PendulumView pendulumView = new PendulumView(0.25, 1, 1.f, 0.5);
+        pendulumView.setHook(200, 10);
         simulationPane.applySimulation(pendulumView);
 
         //prepare window
@@ -31,7 +32,7 @@ public class Main extends Application {
             long lastUpdate = 0;
 
             public void handle(long now) {
-                if (now - lastUpdate >= 17_000_000) {
+                if (now - lastUpdate >= 16_666_666) {
                     simulationPane.simulationStep();
                     lastUpdate = now;
                 }
