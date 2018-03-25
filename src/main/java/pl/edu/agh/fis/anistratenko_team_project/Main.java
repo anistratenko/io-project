@@ -17,7 +17,6 @@ public class Main extends Application {
 
             public void handle(long now) {
                 if (now - lastUpdate >= 17_000_000) {
-                    simulationController.getSimulationPane().setStyle("-fx-background-color: blue;");
                     simulationController.performSimulationStep();
                     lastUpdate = now;
                 }
