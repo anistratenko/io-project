@@ -33,6 +33,7 @@ public class Main extends Application {
 
         primaryStage.setTitle(simulationController.toString());
         primaryStage.setScene(new Scene(root));
+
         primaryStage.show();
 
         startSimulationThread();
