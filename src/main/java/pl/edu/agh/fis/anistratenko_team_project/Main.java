@@ -33,7 +33,8 @@ public class Main extends Application {
 
         primaryStage.setTitle(simulationController.toString());
         primaryStage.setScene(new Scene(root));
-
+        primaryStage.setMinHeight(550);
+        primaryStage.setMinWidth(650);
         primaryStage.show();
 
         startSimulationThread();
