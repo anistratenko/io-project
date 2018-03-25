@@ -144,8 +144,8 @@ public class Pendulum {
 
         Long start = System.nanoTime();
         for (int i = 0; i < 600; i++) p.simulate(1. / 60.);
-
-        System.out.println("Computation time per 1 second simulated: " + ((System.nanoTime() - start) * 1e-9 / 10));
-        System.out.println("Computation time of 1/60 sec: 			  " + ((System.nanoTime() - start) * 1e-9 / 600));
+        Long end = System.nanoTime();
+        System.out.println("Computation time per 1 second simulated: " + ((end - start) * 1e-9 / 10.));
+        System.out.println("Computation time of 1/60 sec: 			 " + ((end - start) * 1e-9 / 600.));
     }
 }
