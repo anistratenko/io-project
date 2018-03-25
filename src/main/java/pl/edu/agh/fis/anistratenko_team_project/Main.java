@@ -16,7 +16,7 @@ public class Main extends Application {
             long lastUpdate = 0;
 
             public void handle(long now) {
-                if (now - lastUpdate >= 17_000_000) {
+                if (now - lastUpdate >= 16_666_666) {
                     simulationController.performSimulationStep();
                     lastUpdate = now;
                 }

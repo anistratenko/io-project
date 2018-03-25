@@ -61,16 +61,18 @@ public class PendulumView implements SimulationView {
      */
     public void performSimulationStep() {
         pendulum.simulate(FRAMETIME);
-        firstBob.setCenterX(offset[0] + pendulum.x1 * offset[1]);
-        firstBob.setCenterY(offset[0] - pendulum.y1 * offset[1]);
-        secondBob.setCenterX(offset[0] + pendulum.x2 * offset[1]);
-        secondBob.setCenterY(offset[0] - pendulum.y2 * offset[1]);
-        firstCord.setEndX(offset[0] + pendulum.x1 * offset[1]);
-        firstCord.setEndY(offset[0] - pendulum.y1 * offset[1]);
-        secondCord.setStartX(offset[0] + pendulum.x1 * offset[1]);
-        secondCord.setStartY(offset[0] - pendulum.y1 * offset[1]);
-        secondCord.setEndX(offset[0] + pendulum.x2 * offset[1]);
-        secondCord.setEndY(offset[0] - pendulum.y2 * offset[1]);
+        firstBob.setCenterX(offset[0] + pendulum.x1 * 250);
+        firstBob.setCenterY(offset[1] - pendulum.y1 * 250);
+        secondBob.setCenterX(offset[0] + pendulum.x2 * 250);
+        secondBob.setCenterY(offset[1] - pendulum.y2 * 250);
+        firstCord.setStartX(offset[0]);
+        firstCord.setStartY(offset[1]);
+        firstCord.setEndX(offset[0] + pendulum.x1 * 250);
+        firstCord.setEndY(offset[1] - pendulum.y1 * 250);
+        secondCord.setStartX(offset[0] + pendulum.x1 * 250);
+        secondCord.setStartY(offset[1] - pendulum.y1 * 250);
+        secondCord.setEndX(offset[0] + pendulum.x2 * 250);
+        secondCord.setEndY(offset[1] - pendulum.y2 * 250);
     }
 
     public Circle getFirstBob() {
