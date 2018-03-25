@@ -16,7 +16,7 @@
 <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.fis.anistratenko_team_project.Main">
 <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="300.0" prefWidth="341.0" />
-      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="209.0" prefWidth="209.0" />
+      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="210.0" prefWidth="250.0" />
 </columnConstraints>
 <rowConstraints>
     <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
@@ -27,28 +27,28 @@
 <children>
     <TabPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="1000.0" tabMaxWidth="1000.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
         <tabs>
-            <Tab text="Pendulum">
+            <Tab text="%paneTitle_pendulum">
                 <content>
                     <Pane id="idSimulationPane" fx:id="simulationPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="333.0" />
                 </content>
             </Tab>
-            <Tab text="Gravity">
+            <Tab text="%paneTitle_gravity">
                 <content>
                     <Pane prefHeight="200.0" prefWidth="200.0" />
                 </content>
             </Tab>
-            <Tab text="Structure">
+            <Tab text="%paneTitle_structure">
                 <content>
                     <Pane prefHeight="200.0" prefWidth="200.0" />
                 </content>
             </Tab>
         </tabs>
     </TabPane>
-    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+    <HBox prefHeight="100.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
         <children>
-            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="Start" />
-            <Button mnemonicParsing="false" text="Pause" />
-            <Button mnemonicParsing="false" text="Reset" />
+            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="%button_start" HBox.hgrow="SOMETIMES" />
+            <Button mnemonicParsing="false" text="%button_pause" HBox.hgrow="SOMETIMES" />
+            <Button mnemonicParsing="false" text="%button_reset" HBox.hgrow="SOMETIMES" />
         </children>
     </HBox>
     <GridPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowSpan="2" GridPane.vgrow="NEVER">
@@ -66,7 +66,7 @@
         <children>
             <Slider majorTickUnit="2.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" GridPane.columnSpan="3">
                 <tooltip>
-                    <Tooltip text="Set the speed of animation" textOverrun="CLIP" />
+                    <Tooltip text="%tooltip_slider" textOverrun="CLIP" />
                 </tooltip>
             </Slider>
             <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
