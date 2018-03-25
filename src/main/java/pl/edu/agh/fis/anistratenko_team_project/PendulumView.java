@@ -7,12 +7,12 @@ import javafx.scene.shape.Line;
 import java.util.ArrayList;
 
 public class PendulumView implements SimulationView {
-
-    ArrayList<Node> elements = new ArrayList<>();
-    Circle c1, c2;
-    Line l1, l2;
-    Pendulum pendulum;
-    int[] hook = {250, 250};
+    public static final double FRAMETIME = 1 / 60.;
+    private ArrayList<Node> elements = new ArrayList<>();
+    private Circle firstBob, secondBob;
+    private Line firstCord, secondCord;
+    private Pendulum pendulum;
+    private int[] offset = {250, 250};
 
     /**
      * Constructor for single pendulum
@@ -23,12 +23,12 @@ public class PendulumView implements SimulationView {
 
     public PendulumView(double length1, double mass1) {
         pendulum = new Pendulum(length1, mass1);
-        c1 = new Circle(300.f, 270.f, 10.f);
-        c2 = c1;
-        elements.add(c1);
-        l1 = new Line(250, 250, c1.getCenterX(), c1.getCenterY());
-        l2 = l1;
-        elements.add(l1);
+        firstBob = new Circle(300., 270., 10.);
+        secondBob = firstBob;
+        elements.add(firstBob);
+        firstCord = new Line(250, 250, firstBob.getCenterX(), firstBob.getCenterY());
+        secondCord = firstCord;
+        elements.add(firstCord);
 
     }
 
@@ -42,44 +42,55 @@ public class PendulumView implements SimulationView {
      */
     public PendulumView(double length1, double mass1, double length2, double mass2) {
         pendulum = new Pendulum(length1, mass1, length2, mass2);
-        c1 = new Circle(300.f, 270.f, 10.f);
-        c2 = new Circle(400.f, 270.f, 5.f);
-        elements.add(c1);
-        elements.add(c2);
-        pendulum.setXY((c1.getCenterX() - 250.) / 250., (c1.getCenterY() - 250.) / 250., (c2.getCenterX() - 250.) / 250., (c2.getCenterY() - 250.) / 250.);
-        l1 = new Line(hook[0], hook[1], c1.getCenterX(), c1.getCenterY());
-        l2 = new Line(c1.getCenterX(), c1.getCenterY(), c2.getCenterX(), c2.getCenterY());
-        elements.add(l1);
-        elements.add(l2);
-    }
-
-    /**
-     * Set where the first pendulum is attached
-     *
-     * @param x - horizontal distance from left edge of window
-     * @param y - vertical distance from top of widow
-     */
-    public void setHook(int x, int y) {
-        hook[0] = x;
-        hook[1] = y;
+        firstBob = new Circle(300., 270., 10.);
+        secondBob = new Circle(400., 270., 5.);
+        elements.add(firstBob);
+        elements.add(secondBob);
+        pendulum.setXY((firstBob.getCenterX() - 250.) / 250.,
+                (firstBob.getCenterY() - 250.) / 250.,
+                (secondBob.getCenterX() - 250.) / 250.,
+                (secondBob.getCenterY() - 250.) / 250.);
+        firstCord = new Line(offset[0], offset[1], firstBob.getCenterX(), firstBob.getCenterY());
+        secondCord = new Line(firstBob.getCenterX(), firstBob.getCenterY(), secondBob.getCenterX(), secondBob.getCenterY());
+        elements.add(firstCord);
+        elements.add(secondCord);
     }
 
     /**
      * Run simulation and move positions of pendulums
      */
-    public void calculateDataToDraw() {
+    public void performSimulationStep() {
+        pendulum.simulate(FRAMETIME);
+        firstBob.setCenterX(offset[0] + pendulum.x1 * offset[1]);
+        firstBob.setCenterY(offset[0] - pendulum.y1 * offset[1]);
+        secondBob.setCenterX(offset[0] + pendulum.x2 * offset[1]);
+        secondBob.setCenterY(offset[0] - pendulum.y2 * offset[1]);
+        firstCord.setEndX(offset[0] + pendulum.x1 * offset[1]);
+        firstCord.setEndY(offset[0] - pendulum.y1 * offset[1]);
+        secondCord.setStartX(offset[0] + pendulum.x1 * offset[1]);
+        secondCord.setStartY(offset[0] - pendulum.y1 * offset[1]);
+        secondCord.setEndX(offset[0] + pendulum.x2 * offset[1]);
+        secondCord.setEndY(offset[0] - pendulum.y2 * offset[1]);
+    }
 
-        pendulum.simulate(1.f / 60.f);
-        c1.setCenterX(hook[0] + pendulum.x1 * hook[1]);
-        c1.setCenterY(hook[0] - pendulum.y1 * hook[1]);
-        c2.setCenterX(hook[0] + pendulum.x2 * hook[1]);
-        c2.setCenterY(hook[0] - pendulum.y2 * hook[1]);
-        l1.setEndX(hook[0] + pendulum.x1 * hook[1]);
-        l1.setEndY(hook[0] - pendulum.y1 * hook[1]);
-        l2.setStartX(hook[0] + pendulum.x1 * hook[1]);
-        l2.setStartY(hook[0] - pendulum.y1 * hook[1]);
-        l2.setEndX(hook[0] + pendulum.x2 * hook[1]);
-        l2.setEndY(hook[0] - pendulum.y2 * hook[1]);
+    public Circle getFirstBob() {
+        return firstBob;
+    }
+
+    public Circle getSecondBob() {
+        return secondBob;
+    }
+
+    public Line getFirstCord() {
+        return firstCord;
+    }
+
+    public Line getSecondCord() {
+        return secondCord;
+    }
+
+    public Pendulum getPendulum() {
+        return pendulum;
     }
 
     /**
@@ -90,13 +101,19 @@ public class PendulumView implements SimulationView {
         return elements;
     }
 
-    @Override
-    public String toString() {
-        return "Pendulum";
+    /**
+     * Set where the first pendulum is attached
+     *
+     * @param x - horizontal distance from left edge of window
+     * @param y - vertical distance from top of widow
+     */
+    public void setOffset(int x, int y) {
+        offset[0] = x;
+        offset[1] = y;
     }
 
     @Override
-    public ArrayList<Object> simulationSettings() {
-        return null;
+    public String toString() {
+        return "Pendulum";
     }
 }

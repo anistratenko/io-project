@@ -6,25 +6,17 @@ import javafx.scene.layout.Pane;
 /**
  * @brief reserve space for simulation, holds all object to draw
  */
-public class SimulationPane extends Pane {
+public class SimulationController {
     private SimulationView simulationView;
+    private Pane simulationPane;
     private String simulationName;
-
-    /**
-     * @param sizeX - width of panel
-     * @param sizeY - height of panel
-     * @brief Initialize empty panel
-     */
-    private void firstInit(int sizeX, int sizeY) {
-        setPrefSize(sizeX, sizeY);
-    }
 
     /**
      * @brief default constructor, sets width and height to 500
      */
 
-    public SimulationPane() {
-        firstInit(500, 500);
+    public SimulationController(Pane simulationPane) {
+        this(500, 500, simulationPane);
     }
 
     /**
@@ -34,8 +26,9 @@ public class SimulationPane extends Pane {
      * @param sizeY - height of panel
      * @brief constructor where you can set size
      */
-    public SimulationPane(int sizeX, int sizeY) {
-        firstInit(sizeX, sizeY);
+    public SimulationController(int sizeX, int sizeY, Pane simulationPane) {
+        this.simulationPane = simulationPane;
+        this.simulationPane.setPrefSize(sizeX, sizeY);
     }
 
 
@@ -45,11 +38,11 @@ public class SimulationPane extends Pane {
      * @brief add element to be drawn in panel
      */
     public void addToPane(Node elementInScene) {
-        getChildren().add(elementInScene);
+        simulationPane.getChildren().add(elementInScene);
     }
 
     /**
-     * @param simulation - Simulation to be drawn
+     * @param simulation - SimulationController to be drawn
      * @return was all elements of simulation successfully added?
      * @brief apply all necessary Nodes to this Pane
      */
@@ -61,8 +54,12 @@ public class SimulationPane extends Pane {
         this.simulationName = simulation.toString();
     }
 
-    public void simulationStep() {
-        simulationView.calculateDataToDraw();
+    public void performSimulationStep() {
+        simulationView.performSimulationStep();
+    }
+
+    public Pane getSimulationPane() {
+        return simulationPane;
     }
 
     /**
@@ -74,4 +71,3 @@ public class SimulationPane extends Pane {
     }
 
 }
-
