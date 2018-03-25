@@ -1,15 +1,9 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @brief reserve space for simulation, holds all object to draw
@@ -78,4 +72,4 @@ public class SimulationController {
         return simulationName;
     }
 
-    }
+}
