@@ -28,7 +28,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui.fxml"));
         Parent root = fxmlLoader.load();
-        simulationController = new SimulationController((Pane)fxmlLoader.getNamespace().get("simulationPane"));
+        simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPane"));
         simulationController.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
 
         primaryStage.setTitle(simulationController.toString());
