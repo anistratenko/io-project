@@ -27,7 +27,7 @@ public class PendulumView implements SimulationView {
         secondBob = firstBob;
         elements.add(firstBob);
         firstCord = new Line(250, 250, firstBob.getCenterX(), firstBob.getCenterY());
-        secondCord = firstCord;
+        secondCord = new Line (250, 250, 250, 250);
         elements.add(firstCord);
 
     }

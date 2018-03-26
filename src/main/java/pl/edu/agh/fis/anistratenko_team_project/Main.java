@@ -29,7 +29,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui.fxml"));
         Parent root = fxmlLoader.load();
         simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPane"));
-        simulationController.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
+        simulationController.applySimulation(new PendulumView(0.25, 1));
 
         primaryStage.setTitle(simulationController.toString());
         primaryStage.setScene(new Scene(root));

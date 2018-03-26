@@ -76,11 +76,11 @@ public class Pendulum {
 
     //function for standard simulation, time >= 0
     public void simulate(double time) {
-        simulate(time, 0);
+        simulate(time, 0., 0.55);
     }
 
-    //function for simulation with additional horizontal force, works only for single pendulum, time >= 0, F [m/s^2] in (-inf;inf)
-    public void simulate(double time, double F) {
+    //function for simulation with additional horizontal force, works only for single pendulum, time >= 0, force [m/s^2] in (-inf;inf)
+    public void simulate(double time, double force, double dragCooefficient) {
         //internal time-step for computations
         double dt = 5e-4;
         //time measuring
@@ -114,11 +114,18 @@ public class Pendulum {
                 theta += d_theta * dt;
                 t += dt;
             }
-        } else {
-            while (t < time) {
-                //System.out.println(phi + " " + theta);
-
-                d2_phi = (-g * Math.sin(phi) + F * Math.cos(phi)) / l1;
+        }
+        else
+        {
+            double ro = 1000; //[kg/m^3] - water density
+            double r = Math.cbrt( (m1/(Math.PI*4000.))*(3./4.));
+            double SD = 2*Math.PI*r*r;
+            double v = 0;
+            while (t < real_t)
+            {
+                v = d_phi*r;
+                d2_phi = (-g * Math.sin(phi) + force * Math.cos(phi) - Math.signum(d_phi)*dragCooefficient*SD*ro*v*v/2.) / l1;
+                //d2_phi = (-g * Math.sin(phi) + force * Math.cos(phi))/l1;
                 d_phi += d2_phi * dt;
                 phi += d_phi * dt;
                 t += dt;
