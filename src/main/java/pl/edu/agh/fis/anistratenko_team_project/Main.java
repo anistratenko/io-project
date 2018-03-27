@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Main extends Application {
     private SimulationController simulationController;
 
@@ -27,11 +30,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui.fxml"));
+        Locale currLocale = new Locale("pl");
+        fxmlLoader.setResources(ResourceBundle.getBundle("Locale", currLocale));
+
         Parent root = fxmlLoader.load();
         simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPane"));
         simulationController.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
 
-        primaryStage.setTitle(simulationController.toString());
+        primaryStage.setTitle(fxmlLoader.getResources().getString("window_title"));
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(550);
         primaryStage.setMinWidth(650);
