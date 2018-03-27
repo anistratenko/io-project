@@ -19,9 +19,9 @@
       <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="210.0" prefWidth="250.0" />
 </columnConstraints>
 <rowConstraints>
-    <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="103.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="353.0" minHeight="10.0" prefHeight="243.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="353.0" minHeight="10.0" prefHeight="274.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="331.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
 </rowConstraints>
 <children>
@@ -60,8 +60,8 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
             <Slider majorTickUnit="2.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" GridPane.columnSpan="3">
@@ -69,30 +69,45 @@
                     <Tooltip text="%tooltip_slider" textOverrun="CLIP" />
                 </tooltip>
             </Slider>
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                 <font>
                     <Font size="14.0" />
                 </font>
+               <tooltip>
+                  <Tooltip text="%tooltip_g" />
+               </tooltip>
             </TextArea>
             <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <font>
                     <Font size="14.0" />
                 </font>
+               <tooltip>
+                  <Tooltip text="%tooltip_bob1y" />
+               </tooltip>
             </TextArea>
             <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.rowIndex="1">
                 <font>
                     <Font size="14.0" />
                 </font>
+               <tooltip>
+                  <Tooltip text="%tooltip_bob1x" />
+               </tooltip>
             </TextArea>
-            <TextArea layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextArea layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.rowIndex="2">
                 <font>
                     <Font size="14.0" />
                 </font>
+               <tooltip>
+                  <Tooltip text="%tooltip_bob2x" />
+               </tooltip>
             </TextArea>
-            <TextArea layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextArea layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <font>
                     <Font size="14.0" />
                 </font>
+               <tooltip>
+                  <Tooltip text="%tooltip_bob2y" />
+               </tooltip>
             </TextArea>
         </children>
     </GridPane>
