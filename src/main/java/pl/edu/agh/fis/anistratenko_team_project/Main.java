@@ -35,7 +35,7 @@ public class Main extends Application {
 
         Parent root = fxmlLoader.load();
         simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPane"));
-        simulationController.applySimulation(new PendulumView(0.25, 1, 1.f, 0.5));
+        simulationController.applySimulation(new PendulumView(0.25, 1));
 
         primaryStage.setTitle(fxmlLoader.getResources().getString("window_title"));
         primaryStage.setScene(new Scene(root));
