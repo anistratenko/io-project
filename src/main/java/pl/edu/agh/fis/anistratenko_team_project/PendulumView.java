@@ -12,7 +12,7 @@ public class PendulumView implements SimulationView {
     private Circle firstBob, secondBob;
     private Line firstCord, secondCord;
     private Pendulum pendulum;
-    private int[] offset = {250, 250};
+    private static int[] offset = {250, 250};
 
     /**
      * Constructor for single pendulum
@@ -111,6 +111,12 @@ public class PendulumView implements SimulationView {
      */
     public void setOffset(int x, int y) {
         offset[0] = x;
+        offset[1] = y;
+    }
+    public static void setOffsetWidth(int x) {
+        offset[0] = x;
+    }
+    public static void setOffsetHeight(int y) {
         offset[1] = y;
     }
 

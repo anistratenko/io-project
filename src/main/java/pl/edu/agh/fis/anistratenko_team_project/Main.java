@@ -41,6 +41,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(550);
         primaryStage.setMinWidth(650);
+        primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> PendulumView.setOffsetWidth(newVal.intValue() / 3));
+        primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> PendulumView.setOffsetHeight(newVal.intValue() / 2));
+
         primaryStage.show();
 
         startSimulationThread();
