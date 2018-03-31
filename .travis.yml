@@ -5,5 +5,5 @@ script: mvn clean verify
 notifications:
   email:
     - robgal519@gmail.com
-    - glaeken@vp.pl 
+    - glaeken@gmail.com
 
