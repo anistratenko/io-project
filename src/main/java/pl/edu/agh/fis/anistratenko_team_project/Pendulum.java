@@ -1,9 +1,8 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
 public class Pendulum {
-    private final double PI = 3.14159265359;
     //variables for simulation
-    private double phi = PI / 2;
+    private double phi = Math.PI / 2;
     private double theta = 0.;
     private double d_phi = 0.;
     private double d_theta = 0.;
@@ -13,6 +12,9 @@ public class Pendulum {
     private double l2 = 0.;
     private double m1 = 0.;
     private double m2 = 0.;
+
+
+
     private double g = 9.81;
     private double real_t = 0.;
     private double t = 0.;
@@ -28,22 +30,34 @@ public class Pendulum {
     public double x2;
     public double y2;
 
+    public double getPhi() {
+        return phi;
+    }
+
+    public void setXY(double X1, double Y1){
+        setXY(X1, Y1, X1, Y1);
+    }
+
+    public double getTheta() {
+        return theta;
+    }
+
     public void setXY(double X1, double Y1, double X2, double Y2) {
         l1 = Math.sqrt(X1 * X1 + Y1 * Y1);
         phi = Math.acos(X1 / l1);
         if (Y1 >= 0) {
-            phi += PI / 2.;
+            phi += Math.PI / 2.;
         } else {
-            phi = PI / 2. - phi;
+            phi = Math.PI / 2. - phi;
         }
 
         if (DP) {
             l2 = Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
             theta = Math.acos(X1 / l1);
             if (Y2 >= Y1) {
-                theta += PI / 2.;
+                theta += Math.PI / 2.;
             } else {
-                theta = PI / 2. - theta;
+                theta = Math.PI / 2. - theta;
             }
             d_theta = 0;
             d2_theta = 0;
@@ -57,6 +71,9 @@ public class Pendulum {
 
     public void setG(double G) {
         g = G;
+    }
+    public double getG() {
+        return g;
     }
 
     //constructor for single pendulum
@@ -146,7 +163,7 @@ public class Pendulum {
         }
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Pendulum p = new Pendulum(0.25, 1, 0.3, 2);
 
         Long start = System.nanoTime();
@@ -154,5 +171,5 @@ public class Pendulum {
         Long end = System.nanoTime();
         System.out.println("Computation time per 1 second simulated: " + ((end - start) * 1e-9 / 10.));
         System.out.println("Computation time of 1/60 sec: 			 " + ((end - start) * 1e-9 / 600.));
-    }
+    }*/
 }
