@@ -1,8 +1,7 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
+import org.junit.Ignore;
 import org.junit.Test;
-
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -106,14 +105,14 @@ public class PendulumTest {
         assertTrue("Random value set, value = " + randomValue.toString() + " ", randomValue-p1.getG() < 1e-15);
     }
 
-    @Test
+    @Test @Ignore
     public void simulate() {
-        assertEquals(true, true);
+
     }
 
-    @Test
+    @Test @Ignore
     public void simulate1() {
-        assertEquals(true, true);
+
     }
 
 }
