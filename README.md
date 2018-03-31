@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/anistratenko/io-project.svg?branch=master)](https://travis-ci.org/anistratenko/io-project)
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
