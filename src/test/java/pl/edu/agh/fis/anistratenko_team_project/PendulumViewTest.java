@@ -57,7 +57,7 @@ public class PendulumViewTest {
     }
 
     @Test
-    public void toString() {
+    public void to_String() {
         assertEquals(true, false);
     }
 }
