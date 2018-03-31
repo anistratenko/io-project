@@ -39,15 +39,16 @@ public class PendulumTest {
         //x1 = y1 = max
         singlePendulum.setXY(Double.MAX_VALUE, Double.MAX_VALUE);
         phi = Math.acos(1);
-        assertTrue("X1 = Y1 = maximum value of data type, expected =" + Double.toString(phi + Math.PI/2.) + " actual = " + singlePendulum.getPhi(), singlePendulum.getPhi() - phi + Math.PI/2. < 1e-15);
+        assertTrue("X1 = Y1 = maximum value of data type, expected =" + Double.toString(phi + Math.PI/2.) + " actual = " + singlePendulum.getPhi(),
+                singlePendulum.getPhi() - phi + Math.PI/2. < 1e-15);
     }
 
     @Test
     public void setXY_DoublePendulum(){
         Pendulum doublePendulum = new Pendulum(1,1,1,1);
         //Y2 << Y1
-        double l1 = Math.sqrt(Math.pow(Double.MAX_VALUE, 2));
-        double theta = Math.acos(1/l1);
+        double l2 = Math.sqrt(0+Math.pow(Double.MAX_VALUE - 0, 2));
+        double theta = Math.acos(1/l2);
         doublePendulum.setXY(1,0, 1, -1 * Double.MAX_VALUE);
         assertTrue("Y2 is minimum value of its type, Y1 is zero",
                 doublePendulum.getTheta()- Math.PI -theta < 1e-15);
@@ -73,7 +74,8 @@ public class PendulumTest {
         double rand = (Math.random()-0.5)* Double.MAX_VALUE;
         doublePendulum.setXY(1,rand,2,rand);
         theta = Math.acos(1);
-        assertTrue("Y2 = Y1 and it is equal to"+ Double.toString(rand),
+        assertTrue("Y2 = Y1 and it is equal to"+ Double.toString(rand)+" expected result is "
+                + Double.toString(theta + Math.PI /2.) + " actual result is " + doublePendulum.getTheta(),
                 doublePendulum.getTheta() - theta + Math.PI /2. < 1e-15);
     }
 
@@ -84,15 +86,9 @@ public class PendulumTest {
     }
 
     @Test(expected=java.lang.ArithmeticException.class)
-    public void setXY_SinglePendulumDivideByZero() {
+    public void setXY_SinglePendulumSqrtOfZero() {
         Pendulum singlePendulum = new Pendulum(1,1);
         singlePendulum.setXY(0,0);
-    }
-
-    @Test(expected=java.lang.ArithmeticException.class)
-    public void setXY_DoublePendulumDivideByZero(){
-        Pendulum doublePendulum = new Pendulum(1,1,1,1);
-        doublePendulum.setXY(0,0,0,0);
     }
 
     @Test

@@ -1,0 +1,52 @@
+file: Pendulum.java
+method: setXY()
+
+****************************************************************
+Possible leaps
+
+In line 56 when 'theta' variable is calculated in denominator is used
+variable 'l1', and therefor variable 'l2' calculated in previous line is unused.
+
+55:            l2 = Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
+56:            theta = Math.acos(X1 / l1);
+
+Did you mean to put 'l2' in place of 'l1' ?
+The tests were constructed such as 'l2' was in used in line 56.
+
+****************************************************************
+Answer:
+
+****************************************************************
+****************************************************************
+Missing exception
+
+When all arguments of function are equal to 0, arithmetic exception should be thrown,
+because of argument of sqrt function should be greater than Zero.
+
+47:        phi = Math.acos(X1 / l1);
+...
+55:           l2 = Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
+
+Therefore the result of test cases setXY_DoublePendulumSqrtOfZero and setXY_SinglePendulumSqrtOfZero are fail.
+
+****************************************************************
+Answer:
+
+****************************************************************
+****************************************************************
+Overflow is possible
+
+When result of equation which is the argument of 'sqrt()' function is bigger than maximum
+value of type Double then overflow occurs
+
+46:        l1 = Math.sqrt(X1 * X1 + Y1 * Y1);
+...
+55:            l2 = Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
+
+
+In that case safe adding and multiply should be applied.
+
+****************************************************************
+Answer:
+
+****************************************************************
