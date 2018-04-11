@@ -10,6 +10,7 @@ public class SimulationController {
     private SimulationView simulationView;
     private Pane simulationPane;
     private String simulationName;
+    private Boolean simulationRunning = true;
 
     /**
      * @brief default constructor, sets width and height to 500
@@ -55,11 +56,16 @@ public class SimulationController {
     }
 
     public void performSimulationStep() {
-        simulationView.performSimulationStep();
+        if (simulationRunning) simulationView.performSimulationStep();
     }
 
     public Pane getSimulationPane() {
         return simulationPane;
+    }
+
+    public void pauseSimulation()
+    {
+        simulationRunning = false;
     }
 
     /**

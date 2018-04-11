@@ -1,5 +1,7 @@
 package pl.edu.agh.fis.anistratenko_team_project;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +14,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
-    private SimulationController simulationController;
+    private static SimulationController simulationController;
+
+    @FXML protected void pauseButtonAction(ActionEvent event) {
+        simulationController.pauseSimulation();
+    }
 
     public void startSimulationThread() {
         new AnimationTimer() {
@@ -25,6 +31,7 @@ public class Main extends Application {
                 }
             }
         }.start();
+
     }
 
     @Override
@@ -47,9 +54,10 @@ public class Main extends Application {
         primaryStage.show();
 
         startSimulationThread();
+        System.out.println(simulationController);
     }
 
     public static void main(String[] args) {
-        launch(args);
+        Application.launch(args);
     }
 }
