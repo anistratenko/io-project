@@ -2,7 +2,7 @@ package pl.edu.agh.fis.anistratenko_team_project;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
+import java.util.TreeMap;
 /**
  * @brief reserve space for simulation, holds all object to draw
  */
@@ -66,6 +66,16 @@ public class SimulationController {
     public void pauseSimulation()
     {
         simulationRunning = false;
+    }
+
+    public void startSimulation()
+    {
+        simulationRunning = true;
+    }
+
+    public void setSimulationViewParameters(TreeMap<String, Double> TM)
+    {
+        simulationView.setParams(TM);
     }
 
     /**

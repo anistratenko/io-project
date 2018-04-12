@@ -13,7 +13,7 @@ public class Pendulum {
     private double l2 = 0.;
     private double m1 = 0.;
     private double m2 = 0.;
-    private double g = 9.81;
+    private double g = -9.81;
     private double real_t = 0.;
     private double t = 0.;
 
@@ -51,6 +51,25 @@ public class Pendulum {
 
         d_phi = 0;
         d2_phi = 0;
+        d_theta = 0;
+        d2_theta = 0;
+        real_t = 0.;
+        t = 0.;
+    }
+
+    public void setParams(double L1, double Phi, double L2, double Theta, double M1, double M2, double G)
+    {
+        l1 = L1;
+        l2 = L2;
+        phi = Phi*Math.PI/180;
+        theta = Theta*Math.PI/180;
+        m1 = 1;
+        m2 = 2;
+        g = G;
+        d_phi = 0;
+        d2_phi = 0;
+        d_theta = 0;
+        d2_theta = 0;
         real_t = 0.;
         t = 0.;
     }
@@ -82,16 +101,16 @@ public class Pendulum {
     //function for simulation with additional horizontal force, works only for single pendulum, time >= 0, force [m/s^2] in (-inf;inf)
     public void simulate(double time, double force, double dragCooefficient) {
         //internal time-step for computations
-        double dt = 5e-4;
+        double dt = 1e-5;
         //time measuring
         real_t += time;
         if (DP) {
             while (t < real_t) {
                 d2_phi = (
                         -m2 * l1 * d_theta * d_theta * Math.sin(phi - theta) * Math.cos(phi - theta)
-                                + g * m2 * Math.sin(theta) * Math.cos(phi - theta)
+                                - g * m2 * Math.sin(theta) * Math.cos(phi - theta)
                                 - m2 * l2 * d_theta * d_theta * Math.sin(phi - theta)
-                                - (m1 + m2) * g * Math.sin(phi)
+                                + (m1 + m2) * g * Math.sin(phi)
                 )
                         /
                         (
@@ -99,9 +118,9 @@ public class Pendulum {
                         );
 
                 d2_theta = (m2 * l2 * d_theta * d_theta * Math.sin(phi - theta) * Math.cos(phi - theta)
-                        + g * Math.sin(phi) * Math.cos(phi - theta) * (m1 + m2)
+                        - g * Math.sin(phi) * Math.cos(phi - theta) * (m1 + m2)
                         + l1 * d_phi * d_phi * Math.sin(phi - theta) * (m1 + m2)
-                        - g * Math.sin(theta) * (m1 + m2)
+                        + g * Math.sin(theta) * (m1 + m2)
                 )
                         /
                         (
@@ -124,7 +143,7 @@ public class Pendulum {
             while (t < real_t)
             {
                 v = d_phi*r;
-                d2_phi = (-g * Math.sin(phi) + force * Math.cos(phi) - Math.signum(d_phi)*dragCooefficient*SD*ro*v*v/2.) / l1;
+                d2_phi = (g * Math.sin(phi) + force * Math.cos(phi) - Math.signum(d_phi)*dragCooefficient*SD*ro*v*v/2.) / l1;
                 //d2_phi = (-g * Math.sin(phi) + force * Math.cos(phi))/l1;
                 d_phi += d2_phi * dt;
                 phi += d_phi * dt;

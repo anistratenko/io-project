@@ -5,6 +5,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class PendulumView implements SimulationView {
     public static final double FRAMETIME = 1 / 60.;
@@ -30,6 +31,11 @@ public class PendulumView implements SimulationView {
         secondCord = new Line (250, 250, 250, 250);
         elements.add(firstCord);
 
+    }
+
+    @Override
+    public void setParams(TreeMap<String,Double> TM) {
+        pendulum.setParams( TM.get("L1"), TM.get("Phi"), TM.get("L2"), TM.get("Theta"), 1,1, TM.get("G") );
     }
 
     /**
