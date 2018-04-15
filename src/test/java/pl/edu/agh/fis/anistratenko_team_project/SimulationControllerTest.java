@@ -60,15 +60,35 @@ public class SimulationControllerTest {
         simulation.applySimulation(new Simulation());
 
 
-        assertEquals("add to Pane calls", simulation.addToPaneCallCounter,2);
+        assertEquals("add to Pane calls", 2,simulation.addToPaneCallCounter);
 
 
 
     }
 
-    @Test @Ignore
+    @Test
     public void performSimulationStep() {
-        assertEquals(true, true);
+
+        class Simulation implements SimulationView{
+            @Override
+            public ArrayList<Node> getNodes(){
+                return new ArrayList<>();
+            }
+            @Override
+            public String toString(){return "test";}
+            public int performSimulationStepCallCounter = 0;
+            @Override
+            public void performSimulationStep(){
+                performSimulationStepCallCounter++;
+            }
+        }
+
+        SimulationController controller = new SimulationController(new Pane());
+        Simulation sim = new Simulation();
+        controller.applySimulation(sim);
+        controller.performSimulationStep();
+
+        assertEquals("simulation Step calls", 1,sim.performSimulationStepCallCounter);
     }
 
 
