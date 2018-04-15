@@ -30,7 +30,7 @@ Developing process is performed in 6 steps
 5. It may be necessary to **tweak your code** to fit the overall programing style of the project, so in that case, just implement suggested changes on your branch
 6. When testing fail, issue will be created, and **process will start over** ( you don't need to feel obliged to work on issue of your function, it's a new task )
 
-TODO image of desired branch setup
+<a href="https://imgbb.com/"><img src="https://image.ibb.co/mCEXSS/repo.png" alt="repo" border="0"></a>
 
 ### Who do I talk to? ###
 
