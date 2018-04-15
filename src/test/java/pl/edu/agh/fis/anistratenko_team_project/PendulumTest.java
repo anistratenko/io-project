@@ -77,19 +77,7 @@ public class PendulumTest {
                 + Double.toString(theta + Math.PI /2.) + " actual result is " + doublePendulum.getTheta(),
                 doublePendulum.getTheta() - theta + Math.PI /2. < 1e-15);
     }
-
-    @Test(expected = java.lang.ArithmeticException.class)
-    public void setXY_DoublePendulumSqrtOfZero() {
-        Pendulum doublePendulum = new Pendulum(1,1,1,1);
-        doublePendulum.setXY(1,Double.MAX_VALUE, 1,-1*Double.MAX_VALUE);
-    }
-
-    @Test(expected=java.lang.ArithmeticException.class)
-    public void setXY_SinglePendulumSqrtOfZero() {
-        Pendulum singlePendulum = new Pendulum(1,1);
-        singlePendulum.setXY(0,0);
-    }
-
+    
     @Test
     public void setG() {
         Pendulum p1 = new Pendulum(1,1);
