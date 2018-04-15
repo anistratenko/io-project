@@ -77,7 +77,7 @@ public class PendulumTest {
                 + Double.toString(theta + Math.PI /2.) + " actual result is " + doublePendulum.getTheta(),
                 doublePendulum.getTheta() - theta + Math.PI /2. < 1e-15);
     }
-    
+
     @Test
     public void setG() {
         Pendulum p1 = new Pendulum(1,1);
