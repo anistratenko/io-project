@@ -3,6 +3,7 @@ package pl.edu.agh.fis.anistratenko_team_project;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -24,9 +25,45 @@ public class SimulationControllerTest {
         assertTrue("Elements are the same", elements.get(0).equals(element));
     }
 
-    @Test @Ignore
+    @Test
     public void applySimulation() {
-        assertEquals(true, true);
+        class SimulationControllerStub extends SimulationController{
+            SimulationControllerStub(){
+                super(new Pane());
+            }
+            public int addToPaneCallCounter = 0;
+            @Override
+            public void addToPane(Node elementInScene) {
+                addToPaneCallCounter++;
+            }
+
+        }
+
+        class Simulation implements SimulationView{
+            @Override
+            public ArrayList<Node> getNodes(){
+                ArrayList<Node> elements = new ArrayList<>();
+                elements.add(new Circle());
+                elements.add(new Rectangle());
+                return elements;
+            }
+
+            /**
+             * @return name of the simulation
+             */
+            @Override
+            public String toString(){return "test";}
+            @Override
+            public void performSimulationStep(){}
+        }
+        SimulationControllerStub simulation = new SimulationControllerStub();
+        simulation.applySimulation(new Simulation());
+
+
+        assertEquals("add to Pane calls", simulation.addToPaneCallCounter,2);
+
+
+
     }
 
     @Test @Ignore
