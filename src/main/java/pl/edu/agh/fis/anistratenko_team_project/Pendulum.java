@@ -43,6 +43,7 @@ public class Pendulum {
     }
 
     public void setXY(double X1, double Y1, double X2, double Y2) {
+        //Double operations are safe, because overflow evaluates to Inf. statement ( 1.0/0.0 )
         l1 = Math.sqrt(X1 * X1 + Y1 * Y1);
         phi = Math.acos(X1 / l1);
         if (Y1 >= 0) {
@@ -53,7 +54,7 @@ public class Pendulum {
 
         if (DP) {
             l2 = Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
-            theta = Math.acos(X1 / l1);
+            theta = Math.acos(X1 / l2);
             if (Y2 >= Y1) {
                 theta += Math.PI / 2.;
             } else {

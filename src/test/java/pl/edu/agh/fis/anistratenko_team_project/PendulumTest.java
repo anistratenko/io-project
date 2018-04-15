@@ -13,7 +13,7 @@ public class PendulumTest {
 
         // y1 << 0
         singlePendulum.setXY(1,-1 * Double.MAX_VALUE);
-        double phi = Math.acos(1 / Double.MAX_VALUE);
+        double phi = Math.PI/2.0;
         assertTrue("Y1 is minimum value of its type",Math.PI/2. - phi - singlePendulum.getPhi() < 1e-15);
 
         // y1 >> 0
@@ -37,9 +37,8 @@ public class PendulumTest {
 
         //x1 = y1 = max
         singlePendulum.setXY(Double.MAX_VALUE, Double.MAX_VALUE);
-        phi = Math.acos(1);
-        assertTrue("X1 = Y1 = maximum value of data type, expected =" + Double.toString(phi + Math.PI/2.) + " actual = " + singlePendulum.getPhi(),
-                singlePendulum.getPhi() - phi + Math.PI/2. < 1e-15);
+        phi = Math.acos(0);
+        assertTrue("X1 = Y1 = maximum value of data type, ",((singlePendulum.getPhi() - (phi + Math.PI/2.))) < 1e-15);
     }
 
     @Test
