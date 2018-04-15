@@ -54,7 +54,7 @@ public class Pendulum {
 
         if (DP) {
             l2 = Math.sqrt(((X2 - X1) * (X2 - X1)) + ((Y2 - Y1) * (Y2 - Y1)));
-            double arg = X2/l2;
+            double arg = (X2-X1)/l2;
             if(arg > 1)
                 arg = 1.0;
             if(arg < -1)
