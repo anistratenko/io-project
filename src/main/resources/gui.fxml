@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.fis.anistratenko_team_project.Main">
+<?import javafx.scene.control.TextField?>
+<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.fis.anistratenko_team_project.Main">
 <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="300.0" prefWidth="341.0" />
       <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="210.0" prefWidth="250.0" />
@@ -46,17 +47,17 @@
     </TabPane>
     <HBox prefHeight="100.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
         <children>
-            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="%button_start" HBox.hgrow="SOMETIMES" />
-            <Button mnemonicParsing="false" text="%button_pause" HBox.hgrow="SOMETIMES" />
-            <Button mnemonicParsing="false" text="%button_reset" HBox.hgrow="SOMETIMES" />
+            <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="%button_start" HBox.hgrow="SOMETIMES" onAction="#startButtonAction" />
+            <Button mnemonicParsing="false" text="%button_pause" HBox.hgrow="SOMETIMES" onAction="#pauseButtonAction" />
+            <Button mnemonicParsing="false" text="%button_reset" HBox.hgrow="SOMETIMES" onAction="#resetButtonAction" />
         </children>
     </HBox>
     <GridPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowSpan="2" GridPane.vgrow="NEVER">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="56.0" minWidth="10.0" prefWidth="49.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="51.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="51.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="51.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="80.0" />
+            <!--<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="51.0" />-->
+            <!--<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="51.0" />-->
+            <!--<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="51.0" />-->
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
@@ -64,51 +65,51 @@
             <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Slider majorTickUnit="2.0" max="10.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" GridPane.columnSpan="3">
+            <Slider fx:id="setSimSpeedSlider" snapToTicks="true" blockIncrement="0.1" majorTickUnit="0.3" max="2.00" min="0.20" minorTickCount="2" showTickLabels="true" showTickMarks="true" GridPane.columnSpan="3">
                 <tooltip>
                     <Tooltip text="%tooltip_slider" textOverrun="CLIP" />
                 </tooltip>
             </Slider>
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+            <TextField fx:id="setGInputText" text="-9.81" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="65.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
                 <font>
                     <Font size="14.0" />
                 </font>
                <tooltip>
                   <Tooltip text="%tooltip_g" />
                </tooltip>
-            </TextArea>
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            </TextField>
+            <TextField fx:id="setFiInputText" text="90" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <font>
                     <Font size="14.0" />
                 </font>
                <tooltip>
                   <Tooltip text="%tooltip_bob1y" />
                </tooltip>
-            </TextArea>
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.rowIndex="1">
+            </TextField>
+            <TextField fx:id="setL1InputText" text="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="65.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <font>
                     <Font size="14.0" />
                 </font>
                <tooltip>
                   <Tooltip text="%tooltip_bob1x" />
                </tooltip>
-            </TextArea>
-            <TextArea layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.rowIndex="2">
+            </TextField>
+            <TextField fx:id="setL2InputText" text="0.25" layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="65.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
                 <font>
                     <Font size="14.0" />
                 </font>
                <tooltip>
                   <Tooltip text="%tooltip_bob2x" />
                </tooltip>
-            </TextArea>
-            <TextArea layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            </TextField>
+            <TextField fx:id="setThetaInputText" text="90" layoutX="56.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <font>
                     <Font size="14.0" />
                 </font>
                <tooltip>
                   <Tooltip text="%tooltip_bob2y" />
                </tooltip>
-            </TextArea>
+            </TextField>
         </children>
     </GridPane>
 </children>
