@@ -49,23 +49,24 @@ public class PendulumTest {
         double theta = Math.acos(1/l2);
         doublePendulum.setXY(1,0, 1, -1 * Double.MAX_VALUE);
         assertTrue("Y2 is minimum value of its type, Y1 is zero",
-                doublePendulum.getTheta()- Math.PI -theta < 1e-15);
+                (doublePendulum.getTheta()- (Math.PI/2. -theta)) < 1e-15);
 
         //Y2 >> Y1
+        theta = Math.acos(0);
         doublePendulum.setXY(1, 0, 1, Double.MAX_VALUE);
         assertTrue("Y2 is maximum value of its type, Y1 is zero",
-                doublePendulum.getTheta()- Math.PI + theta < 1e-15);
+                (doublePendulum.getTheta() - (Math.PI/2. + theta)) < 1e-15);
 
         //Y2 < Y1
         doublePendulum.setXY(1, 0, 2, Double.MIN_VALUE );
         theta = Math.acos(1);
         assertTrue("Y2 is minimum positive value of its type, Y1 is zero",
-                doublePendulum.getTheta()- Math.PI + theta < 1e-15);
+                (doublePendulum.getTheta()- (Math.PI/2. + theta)) < 1e-15);
 
         //Y2 > Y1
         doublePendulum.setXY(1, 0, 2, -1 * Double.MIN_VALUE );
         assertTrue("Y2 is maximum negative value ( close to 0 ) of its type, Y1 is zero",
-                doublePendulum.getTheta()- Math.PI + theta < 1e-15);
+                (doublePendulum.getTheta()- (Math.PI/2. + theta)) < 1e-15);
 
 
         //Y2 = Y1
@@ -74,7 +75,7 @@ public class PendulumTest {
         theta = Math.acos(1);
         assertTrue("Y2 = Y1 and it is equal to"+ Double.toString(rand)+" expected result is "
                 + Double.toString(theta + Math.PI /2.) + " actual result is " + doublePendulum.getTheta(),
-                doublePendulum.getTheta() - theta + Math.PI /2. < 1e-15);
+                (doublePendulum.getTheta() - (theta + Math.PI /2.)) < 1e-15);
     }
 
     @Test

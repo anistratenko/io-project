@@ -53,8 +53,13 @@ public class Pendulum {
         }
 
         if (DP) {
-            l2 = Math.sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
-            theta = Math.acos(X1 / l2);
+            l2 = Math.sqrt(((X2 - X1) * (X2 - X1)) + ((Y2 - Y1) * (Y2 - Y1)));
+            double arg = X2/l2;
+            if(arg > 1)
+                arg = 1.0;
+            if(arg < -1)
+                arg = -1.0;
+            theta = Math.acos(arg);
             if (Y2 >= Y1) {
                 theta += Math.PI / 2.;
             } else {
