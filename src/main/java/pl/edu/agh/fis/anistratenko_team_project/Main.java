@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 
 public class Main extends Application {
     private static SimulationController simulationController;
+    private static SimulationController simulationControllerGravity;
 
     @FXML private TextField setGInputText;
     @FXML private TextField setL1InputText;
@@ -26,10 +27,12 @@ public class Main extends Application {
 
     @FXML protected void pauseButtonAction(ActionEvent event) {
         simulationController.pauseSimulation();
+        simulationControllerGravity.pauseSimulation();
     }
 
     @FXML protected void startButtonAction(ActionEvent event) {
         simulationController.startSimulation();
+        simulationControllerGravity.startSimulation();
     }
 
     @FXML protected void resetButtonAction(ActionEvent event) {
@@ -40,6 +43,7 @@ public class Main extends Application {
         TM.put("Theta", Double.parseDouble(setThetaInputText.getText()));
         TM.put("G", Double.parseDouble(setGInputText.getText()));
         simulationController.setSimulationViewParameters(TM);
+        simulationControllerGravity.setSimulationViewParameters(TM); // TODO change to proper parameter
     }
 
     public void startSimulationThread() {
@@ -49,6 +53,7 @@ public class Main extends Application {
             public void handle(long now) {
                 if (now - lastUpdate >= 16_666_666) {
                     simulationController.performSimulationStep();
+                    simulationControllerGravity.performSimulationStep();
                     lastUpdate = now;
                 }
             }
@@ -63,8 +68,11 @@ public class Main extends Application {
         fxmlLoader.setResources(ResourceBundle.getBundle("Locale", currLocale));
 
         Parent root = fxmlLoader.load();
-        simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPane"));
+        simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPanePendulum"));
+        simulationControllerGravity = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPaneGravity"));
+
         simulationController.applySimulation(new PendulumView(0.25, 1, 0.25, 1));
+        simulationControllerGravity.applySimulation(new GravityView(10));
 
         primaryStage.setTitle(fxmlLoader.getResources().getString("window_title"));
         primaryStage.setScene(new Scene(root));
@@ -76,7 +84,7 @@ public class Main extends Application {
         primaryStage.show();
 
         startSimulationThread();
-        System.out.println(simulationController);
+//        System.out.println(simulationController);
     }
 
     public static void main(String[] args) {
