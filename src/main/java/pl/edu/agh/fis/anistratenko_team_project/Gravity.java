@@ -36,7 +36,7 @@ class Body {
         this.r = newR;
         this.m = newM;
         this.ax = this.ay = this.vx = this.vy = 0;
-        this.active = true;
+        this.active = true; // workaround. defines if body was removed(false) or wasn't(true)
     }
 
     boolean beyondTheCanvas() {
@@ -91,11 +91,9 @@ public class Gravity {
     public void simulate(double time) {
         double dt = 0.008;
         real_t += time;
-//        System.out.println("time: " + real_t);
         while (t < real_t) {
             calculateAccelerations();
             for (Body i : bodies) {
-//                System.out.println(bodies.size());
                 i.updatePosition();
             }
 
@@ -112,10 +110,8 @@ public class Gravity {
 
         for (int cur = 0; cur < bodies.size(); cur++) {// for each body ...
 
-            if (bodies.get(cur).active) {
+            if (bodies.get(cur).active) { // workaround due to impossibility to remove bodies from gravityiew (applySimulation() in SimulationController executes only once)
                 for (int i = 0; i < bodies.size(); i++) { // ... calculate resulting acceleration
-               /* HERE TODO avoiding situation in which current body was deleted*/
-//               System.out.println(bodies.size());
                     if (cur >= bodies.size()) continue;
                     if (bodies.get(cur).beyondTheCanvas()) {
 //                    bodies.remove(cur);
