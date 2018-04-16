@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/anistratenko/io-project.svg?branch=master)](https://travis-ci.org/anistratenko/io-project)
 
-# ShowPhisycs (temporary name) #
+# ShowPhysics (temporary name) #
 
 It is simple GUI program which is designed to show Physics experiments, that would be difficult to perform in lecture or classes.
 
