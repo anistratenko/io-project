@@ -30,12 +30,12 @@
         <tabs>
             <Tab text="%paneTitle_pendulum">
                 <content>
-                    <Pane id="idSimulationPane" fx:id="simulationPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="333.0" />
+                    <Pane id="idSimulationPanePendulum" fx:id="simulationPanePendulum" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="333.0" />
                 </content>
             </Tab>
             <Tab text="%paneTitle_gravity">
                 <content>
-                    <Pane prefHeight="200.0" prefWidth="200.0" />
+                    <Pane id="idSimulationPaneGravity" fx:id="simulationPaneGravity" prefHeight="200.0" prefWidth="200.0" />
                 </content>
             </Tab>
             <Tab text="%paneTitle_structure">
