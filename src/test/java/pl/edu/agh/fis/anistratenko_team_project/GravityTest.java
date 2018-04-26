@@ -29,6 +29,12 @@ public class GravityTest {
     @Test
     public void simulate() {
         Gravity gravity = new Gravity(2);
+
+        gravity.getBody(0).vx = 0;
+        gravity.getBody(0).vy = 0;
+        gravity.getBody(1).vx = 0;
+        gravity.getBody(1).vy = 0;
+
         gravity.getBody(0).x = 0;
         gravity.getBody(0).y = 0;
         gravity.getBody(1).x = 0;
@@ -42,6 +48,12 @@ public class GravityTest {
         assertTrue(gravity.getBody(1).y < 50);
 
         gravity = new Gravity(2);
+
+        gravity.getBody(0).vx = 0;
+        gravity.getBody(0).vy = 0;
+        gravity.getBody(1).vx = 0;
+        gravity.getBody(1).vy = 0;
+
         gravity.getBody(0).x = 0;
         gravity.getBody(0).y = 50;
         gravity.getBody(1).x = 50;
@@ -75,8 +87,8 @@ public class GravityTest {
             gravity.getBody(i).y = startY + (int) (Math.random() * 50 - 25);
         }
 
-        gravity.simulate(10);
+        gravity.simulate(30);
 
-        assertEquals("12 bodies should merge to 1 after 10s", 1, gravity.getNumOfBodies());
+        assertEquals("12 bodies should merge to 1 and then get GCd after more than 30s", 0, gravity.getNumOfBodies());
     }
 }
