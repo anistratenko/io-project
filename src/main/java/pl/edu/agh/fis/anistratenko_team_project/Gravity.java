@@ -4,55 +4,68 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Math;
 
-class Body {
-    double x;
-    double y;
-    double r;
-    double m;
-    double ax, ay, vx, vy;
-    boolean active;
 
-    //    int id; // id is used for ignoring body on resultant force calculating
-    public double getX() {
-        return x;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getM() {
-        return m;
-    }
-//    public int getId() {return id;}
-
-    public Body(int newX, int newY, int newR, int newM) {
-        this.x = newX;
-        this.y = newY;
-        this.r = newR;
-        this.m = newM;
-        this.ax = this.ay = this.vx = this.vy = 0;
-        this.active = true; // workaround. defines if body was removed(false) or wasn't(true)
-    }
-
-    boolean beyondTheCanvas() {
-        return Math.abs(this.getX()) > 1000 || Math.abs(this.getY()) > 1000;
-    }
-
-    void updatePosition() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vx += this.ax;
-        this.vy += this.ay;
-    }
-
-}
 
 public class Gravity {
+
+    class Body {
+        double x;
+        double y;
+        double r;
+        double m;
+        double ax, ay, vx, vy;
+        boolean active;
+
+        public double getX()  { return x; }
+        public double getY()  { return y; }
+        public double getVx() { return vx;}
+        public double getVy() { return vy; }
+
+        public double getR() {
+            return r;
+        }
+        public double getM() {
+            return m;
+        }
+
+
+
+        public void setX(double x) { this.x = x; }
+        public void setY(double y) { this.y = y; }
+
+        public void setR(double r) { this.r = r; }
+        public void setM(double m) { this.m = m; }
+
+        public void setAx(double ax) { this.ax = ax; }
+        public void setAy(double ay) { this.ay = ay; }
+
+        public void setVx(double vx) { this.vx = vx; }
+        public void setVy(double vy) { this.vy = vy; }
+
+        public Body(int newX, int newY, int newR, int newM, int newVx, int newVy) {
+            this.x = newX;
+            this.y = newY;
+            this.r = newR;
+            this.m = newM;
+            this.ax = this.ay = 0;
+            this.vx = newVx;
+            this.vy = newVy;
+            this.active = true; // workaround. defines if body was removed(false) or wasn't(true)
+        }
+
+        boolean beyondTheCanvas() {
+            return Math.abs(this.getX()) > 1000 || Math.abs(this.getY()) > 1000;
+        }
+
+        void updatePosition() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vx += this.ax;
+            this.vy += this.ay;
+        }
+
+    }
+
     private ArrayList<Body> bodies = new ArrayList<>();
     private double G = 8e-1;
     private double real_t = 0.;
@@ -73,8 +86,9 @@ public class Gravity {
     public Gravity(int numOfBodies) {
 //        Random rnd = new Random();
         for (int i = 0; i < numOfBodies; i++) {
-            bodies.add(new Body(rnd.nextInt(300),
-                    rnd.nextInt(300), 10, 10));
+            bodies.add(new Body(rnd.nextInt(300), rnd.nextInt(300),
+                                10, 10,
+                                (rnd.nextInt(10) - 5) / 4, (rnd.nextInt(10) - 5) / 4));
         }
     }
 
@@ -84,7 +98,7 @@ public class Gravity {
         bodies.clear();
         for (int i = 0; i < numOfBodies; i++) {
             bodies.add(new Body(rnd.nextInt(300),
-                    rnd.nextInt(300), 10, 10));
+                    rnd.nextInt(300), 10, 10,  (rnd.nextInt(10) - 5) / 4, (rnd.nextInt(10) - 5) / 4));
         }
     }
 
@@ -114,16 +128,14 @@ public class Gravity {
                 for (int i = 0; i < bodies.size(); i++) { // ... calculate resulting acceleration
                     if (cur >= bodies.size()) continue;
                     if (bodies.get(cur).beyondTheCanvas()) {
-//                    bodies.remove(cur);
-                        bodies.get(cur).active = false;
-                        bodies.get(cur).r = 0;
-                        bodies.get(cur).m = 0;
-                        System.out.println("removed beyond " + cur);
+                        bodies.remove(cur);
+//                        bodies.get(cur).active = false;
+//                        bodies.get(cur).r = 0;
+//                        bodies.get(cur).m = 0;
                         continue;
                     }
 
                     if (i != cur && bodies.get(i).active) {  // ignore the current body
-//                    System.out.println(cur + " " +  i + " " + bodies.size());
                         double dist = calcDistance(cur, i);
 
                         if (dist > bodies.get(cur).r) {
@@ -159,14 +171,12 @@ public class Gravity {
 
 //        bodies.get(cur).ax = 0.0;
 //        bodies.get(cur).ay = 0.0; // probably the momentum preserving law will be added.
-        bodies.get(cur).vx = 0.0;
-        bodies.get(cur).vy = 0.0;
-        bodies.get(i).active = false;
-        bodies.get(i).r = 0;
-        bodies.get(i).m = 0;
-//        bodies.remove(i);
-        System.out.println("removed " + i);
-
+//        bodies.get(cur).vx = 0.0;
+//        bodies.get(cur).vy = 0.0;
+//        bodies.get(i).active = false;
+//        bodies.get(i).r = 0;
+//        bodies.get(i).m = 0;
+        bodies.remove(i);
     }
 
 
