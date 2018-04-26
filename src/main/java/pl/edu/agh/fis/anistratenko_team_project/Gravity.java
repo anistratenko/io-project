@@ -4,55 +4,60 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Math;
 
-class Body {
-    double x;
-    double y;
-    double r;
-    double m;
-    double ax, ay, vx, vy;
-    boolean active;
 
-    //    int id; // id is used for ignoring body on resultant force calculating
-    public double getX() {
-        return x;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getM() {
-        return m;
-    }
-//    public int getId() {return id;}
-
-    public Body(int newX, int newY, int newR, int newM) {
-        this.x = newX;
-        this.y = newY;
-        this.r = newR;
-        this.m = newM;
-        this.ax = this.ay = this.vx = this.vy = 0;
-        this.active = true; // workaround. defines if body was removed(false) or wasn't(true)
-    }
-
-    boolean beyondTheCanvas() {
-        return Math.abs(this.getX()) > 1000 || Math.abs(this.getY()) > 1000;
-    }
-
-    void updatePosition() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vx += this.ax;
-        this.vy += this.ay;
-    }
-
-}
 
 public class Gravity {
+
+    class Body {
+        double x;
+        double y;
+        double r;
+        double m;
+        double ax, ay, vx, vy;
+        boolean active;
+
+        //    int id; // id is used for ignoring body on resultant force calculating
+        public double getX() {
+            return x;
+        }
+
+        public double getR() {
+            return r;
+        }
+
+        public double getY() {
+            return y;
+        }
+
+        public double getM() {
+            return m;
+        }
+//    public int getId() {return id;}
+
+        public Body(int newX, int newY, int newR, int newM, int newVx, int newVy) {
+            this.x = newX;
+            this.y = newY;
+            this.r = newR;
+            this.m = newM;
+            this.ax = this.ay = 0;
+            this.vx = newVx;
+            this.vy = newVy;
+            this.active = true; // workaround. defines if body was removed(false) or wasn't(true)
+        }
+
+        boolean beyondTheCanvas() {
+            return Math.abs(this.getX()) > 1000 || Math.abs(this.getY()) > 1000;
+        }
+
+        void updatePosition() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vx += this.ax;
+            this.vy += this.ay;
+        }
+
+    }
+
     private ArrayList<Body> bodies = new ArrayList<>();
     private double G = 8e-1;
     private double real_t = 0.;
@@ -73,8 +78,9 @@ public class Gravity {
     public Gravity(int numOfBodies) {
 //        Random rnd = new Random();
         for (int i = 0; i < numOfBodies; i++) {
-            bodies.add(new Body(rnd.nextInt(300),
-                    rnd.nextInt(300), 10, 10));
+            bodies.add(new Body(rnd.nextInt(300), rnd.nextInt(300),
+                                10, 10,
+                                rnd.nextInt(2) - 1, rnd.nextInt(2) - 1));
         }
     }
 
@@ -84,7 +90,7 @@ public class Gravity {
         bodies.clear();
         for (int i = 0; i < numOfBodies; i++) {
             bodies.add(new Body(rnd.nextInt(300),
-                    rnd.nextInt(300), 10, 10));
+                    rnd.nextInt(300), 10, 10,  rnd.nextInt(2) - 1, rnd.nextInt(2) - 1));
         }
     }
 
