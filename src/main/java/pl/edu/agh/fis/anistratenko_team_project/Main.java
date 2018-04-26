@@ -7,16 +7,20 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
-import javafx.scene.control.TextField;
 
 public class Main extends Application {
     private static SimulationController simulationController;
+    private static SimulationController simulationControllerGravity;
+
 
     @FXML private TextField setGInputText;
     @FXML private TextField setL1InputText;
@@ -24,12 +28,16 @@ public class Main extends Application {
     @FXML private TextField setFiInputText;
     @FXML private TextField setThetaInputText;
 
+
     @FXML protected void pauseButtonAction(ActionEvent event) {
         simulationController.pauseSimulation();
+        simulationControllerGravity.pauseSimulation();
+        
     }
 
     @FXML protected void startButtonAction(ActionEvent event) {
         simulationController.startSimulation();
+        simulationControllerGravity.startSimulation();
     }
 
     @FXML protected void resetButtonAction(ActionEvent event) {
@@ -40,6 +48,7 @@ public class Main extends Application {
         TM.put("Theta", Double.parseDouble(setThetaInputText.getText()));
         TM.put("G", Double.parseDouble(setGInputText.getText()));
         simulationController.setSimulationViewParameters(TM);
+        simulationControllerGravity.setSimulationViewParameters(TM); // TODO change to proper parameter
     }
 
     public void startSimulationThread() {
@@ -49,6 +58,7 @@ public class Main extends Application {
             public void handle(long now) {
                 if (now - lastUpdate >= 16_666_666) {
                     simulationController.performSimulationStep();
+                    simulationControllerGravity.performSimulationStep();
                     lastUpdate = now;
                 }
             }
@@ -63,20 +73,29 @@ public class Main extends Application {
         fxmlLoader.setResources(ResourceBundle.getBundle("Locale", currLocale));
 
         Parent root = fxmlLoader.load();
-        simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPane"));
+        simulationController = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPanePendulum"));
+        simulationControllerGravity = new SimulationController((Pane) fxmlLoader.getNamespace().get("simulationPaneGravity"));
+
         simulationController.applySimulation(new PendulumView(0.25, 1, 0.25, 1));
+        simulationControllerGravity.applySimulation(new GravityView(10));
 
         primaryStage.setTitle(fxmlLoader.getResources().getString("window_title"));
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(550);
         primaryStage.setMinWidth(650);
-        primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> PendulumView.setOffsetWidth(newVal.intValue() / 3));
-        primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> PendulumView.setOffsetHeight(newVal.intValue() / 2));
+        primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            PendulumView.setOffsetWidth(newVal.intValue() / 3);
+            GravityView.setOffsetWidth(newVal.intValue() / 3);
+        });
+        primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            PendulumView.setOffsetHeight(newVal.intValue() / 2);
+            GravityView.setOffsetHeight(newVal.intValue() / 2);
+        });
 
         primaryStage.show();
 
         startSimulationThread();
-        System.out.println(simulationController);
+//        System.out.println(simulationController);
     }
 
     public static void main(String[] args) {

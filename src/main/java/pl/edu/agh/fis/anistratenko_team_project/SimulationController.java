@@ -57,6 +57,9 @@ public class SimulationController {
 
     public void performSimulationStep() {
         if (simulationRunning) simulationView.performSimulationStep();
+        simulationPane.getChildren().clear();
+        for (Node i : simulationView.getNodes())
+            addToPane(i);
     }
 
     public Pane getSimulationPane() {
