@@ -7,17 +7,20 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
-import javafx.scene.control.TextField;
 
 public class Main extends Application {
     private static SimulationController simulationController;
     private static SimulationController simulationControllerGravity;
+
 
     @FXML private TextField setGInputText;
     @FXML private TextField setL1InputText;
@@ -25,9 +28,11 @@ public class Main extends Application {
     @FXML private TextField setFiInputText;
     @FXML private TextField setThetaInputText;
 
+
     @FXML protected void pauseButtonAction(ActionEvent event) {
         simulationController.pauseSimulation();
         simulationControllerGravity.pauseSimulation();
+        
     }
 
     @FXML protected void startButtonAction(ActionEvent event) {

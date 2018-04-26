@@ -17,8 +17,8 @@ public class GravityView implements SimulationView{
     public GravityView(int numOfBodies){
         gravity = new Gravity(numOfBodies);
         for (int i = 0; i < numOfBodies; i++){
-            elements.add(new Circle((double)gravity.getBody(i).getX(),
-                                    (double)gravity.getBody(i).getY(),
+            elements.add(new Circle(gravity.getBody(i).getX(),
+                                    gravity.getBody(i).getY(),
                                     gravity.getBody(i).getR()));
         }
     }
@@ -49,7 +49,6 @@ public class GravityView implements SimulationView{
             ((Circle)elements.get(i)).setCenterY(offset[1] - gravity.getBody(i).getY());
             ((Circle)elements.get(i)).setRadius(gravity.getBody(i).getR());
         }
-
     }
 
     public static void setOffsetWidth(int x) {
