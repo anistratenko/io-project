@@ -37,12 +37,18 @@ public class GravityView implements SimulationView{
     @Override
     public void performSimulationStep() {
         gravity.simulate(FRAMERATE);
-
-        for (int i = 0; i < elements.size(); i++){
-            ((Circle)elements.get(i)).setCenterX(gravity.getBody(i).getX());
-            ((Circle)elements.get(i)).setCenterY(gravity.getBody(i).getY());
-            ((Circle)elements.get(i)).setRadius(gravity.getBody(i).getR());
+        elements.clear();
+        for (int i = 0; i < gravity.getNumOfBodies(); i++){
+            elements.add(new Circle((double)gravity.getBody(i).getX(),
+                    (double)gravity.getBody(i).getY(),
+                    gravity.getBody(i).getR()));
         }
+
+//        for (int i = 0; i < elements.size(); i++){
+//            ((Circle)elements.get(i)).setCenterX(gravity.getBody(i).getX());
+//            ((Circle)elements.get(i)).setCenterY(gravity.getBody(i).getY());
+//            ((Circle)elements.get(i)).setRadius(gravity.getBody(i).getR());
+//        }
 
     }
 

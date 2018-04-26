@@ -164,7 +164,7 @@ public class Gravity {
         bodies.get(i).active = false;
         bodies.get(i).r = 0;
         bodies.get(i).m = 0;
-//        bodies.remove(i);
+        bodies.remove(i);
         System.out.println("removed " + i);
 
     }
