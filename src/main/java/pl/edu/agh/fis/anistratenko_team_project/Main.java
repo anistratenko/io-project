@@ -84,7 +84,7 @@ public class Main extends Application {
         });
         primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
             PendulumView.setOffsetHeight(newVal.intValue() / 2);
-            GravityView.setOffsetWidth(newVal.intValue() / 2);
+            GravityView.setOffsetHeight(newVal.intValue() / 2);
         });
 
         primaryStage.show();
